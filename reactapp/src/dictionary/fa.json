@@ -1,0 +1,22 @@
+{
+  "app": "یادم هست!",
+  "appDescription": "مدیریت و برنامه ریزی وظایف",
+  "username": "نام کاربری",
+  "password": "کلمه عبور",
+  "login": "ورود",
+  "logout": "خروج",
+  "home": "خانه",
+  "user": "کاربر",
+  "fullName": "نام و نام خانوادگی",
+  "email": "ایمیل",
+  "enterEmail": "ایمیل را وارد کنید",
+  "all": "همه",
+  "userType": "نوع کاربر",
+  "status": "وضعیت",
+  "description": "توضیحات",
+  "userInfo": "اطلاعات کاربر",
+  "search": "جستجو",
+  "edit": "ویرایش",
+  "add": "افزودن",
+  "dontHaveAnAccount": "حساب کاربری ندارید؟"
+}
