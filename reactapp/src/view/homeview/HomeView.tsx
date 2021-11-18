@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { Navbar, Container, Card, Table, Button, Nav } from 'react-bootstrap';
+import React, {Component} from 'react';
+import {Navbar, Container, Card, Table, Button, Nav} from 'react-bootstrap';
 import CommonUtil from "../../CommonUtil";
 import './HomeView.css';
+import {Link} from 'react-router-dom';
 
 
 export interface HomeViewProps {
@@ -12,20 +13,23 @@ export interface HomeViewState {
 }
 
 class HomeView extends Component<HomeViewProps, HomeViewState> {
+    constructor(props: any) {
+        super(props);
+    }
 
     render() {
         return (
             <div className={'home-view'}>
                 <Navbar bg="dark" variant="dark">
                     <Container className={'nav-container'}>
-                        <Navbar.Brand href="#home">
-                           {' '}
+                        <Link className={'navbar-brand'} to={"/home"}>
+                            {' '}
                             {CommonUtil.getPhrase('app')}
-                        </Navbar.Brand>
+                        </Link>
                         <Nav className={'nav'}>
-                            <Nav.Link href="#home">{CommonUtil.getPhrase('home')}</Nav.Link>
-                            <Nav.Link href="#features">{CommonUtil.getPhrase('profile')}</Nav.Link>
-                            <Nav.Link href="#pricing">{CommonUtil.getPhrase('logout')}</Nav.Link>
+                            <Link className={'nav-link'} to={"/home"}>{CommonUtil.getPhrase('home')}</Link>
+                            <Link className={'nav-link'} to={"/signup"}>{CommonUtil.getPhrase('signup')}</Link>
+                            <Link className={'nav-link'} to={"/login"}>{CommonUtil.getPhrase('login')}</Link>
                         </Nav>
                     </Container>
                 </Navbar>
@@ -66,7 +70,7 @@ class HomeView extends Component<HomeViewProps, HomeViewState> {
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td colSpan={2} >Larry the Bird</td>
+                            <td colSpan={2}>Larry the Bird</td>
                             <td>@twitter</td>
                             <td>
                                 <Button variant={'success'}>{CommonUtil.getPhrase('changeStatus')}</Button>{' '}
@@ -78,7 +82,8 @@ class HomeView extends Component<HomeViewProps, HomeViewState> {
                     </Table>
                 </Card>
             </div>
-        );
+        )
+            ;
     }
 }
 
