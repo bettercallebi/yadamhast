@@ -1,0 +1,8 @@
+.footer-view{
+    direction: rtl;
+    text-align: center;
+    position:fixed;
+    left:0;
+    bottom:0;
+    right:0;
+}

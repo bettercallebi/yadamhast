@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
 import {Navbar, Container, Card, Table, Button, Nav} from 'react-bootstrap';
 import CommonUtil from "../../CommonUtil";
-import './HomeView.css';
 import {Link} from 'react-router-dom';
 import HeaderView from "../headerview/HeaderView";
 import FooterView from "../footerview/FooterView";
 
 
-export interface HomeViewProps {
+export interface WelcomeViewProps {
 }
 
-export interface HomeViewState {
+export interface WelcomeViewState {
 
 }
 
-class HomeView extends Component<HomeViewProps, HomeViewState> {
+class WelcomeView extends Component<WelcomeViewProps, WelcomeViewState> {
     constructor(props: any) {
         super(props);
     }
@@ -23,7 +22,7 @@ class HomeView extends Component<HomeViewProps, HomeViewState> {
         return (
             <div className={'home-view'}>
                 <HeaderView/>
-                <Card className={'home-message'}>
+                <Card>
                     <Card.Body>
                         <blockquote className={'blockquote mb-0'}>
                             <p>
@@ -41,4 +40,4 @@ class HomeView extends Component<HomeViewProps, HomeViewState> {
     }
 }
 
-export default HomeView;
+export default WelcomeView;

@@ -1,10 +1,8 @@
-.data-table{
+.home-message{
     position: relative;
     width: 70vw;
     padding: 40px 20px;
     margin: 15vh auto;
     border-radius: 15px;
 }
-.nav-container{
-    justify-content: flex-start !important;
-}
+
