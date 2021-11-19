@@ -56,8 +56,10 @@
                 <configuration>
                     <excludes>
                         <exclude>
+                            <annotationProcessorPaths>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                            </annotationProcessorPaths>
                         </exclude>
                     </excludes>
                 </configuration>
