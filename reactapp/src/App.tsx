@@ -10,6 +10,7 @@ import UserListView from "./view/userlistview/UserListView";
 import TaskListView from "./view/tasklistview/TaskListView";
 import HeaderView from "./view/headerview/HeaderView";
 import FooterView from "./view/footerview/FooterView";
+import ProfileView from "./view/profileview/ProfileView";
 
 function App() {
     return (
@@ -21,7 +22,7 @@ function App() {
                 <Route path={'/signup'} element={<SignupView/>}/>
                 <Route path={'/users'} element={<UserListView/>}/>
                 <Route path={'/tasks'} element={<TaskListView/>}/>
-                <Route path={'/profile'} element={<SignupView/>}/>
+                <Route path={'/profile'} element={<ProfileView/>}/>
             </Routes>
         </Router>
     );
