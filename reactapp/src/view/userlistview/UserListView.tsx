@@ -5,6 +5,8 @@ import './UserListView.css';
 import './../../css/DataTable.css';
 import HeaderView from "../headerview/HeaderView";
 import FooterView from "../footerview/FooterView";
+import {faContactCard} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export interface UserListViewProps {
@@ -24,7 +26,9 @@ class UserListView extends Component<UserListViewProps, UserListViewState> {
             <div className={'user-list-view'}>
                 <HeaderView/>
                 <Card className={'data-table'}>
-                    <Card.Header className={'data-table-header'} as={'h1'}>{CommonUtil.getPhrase('userList')} </Card.Header>
+                    <Card.Header className={'data-table-header'} as={'h1'}>
+                        <FontAwesomeIcon size={"1x"} icon={faContactCard}/>{CommonUtil.getPhrase('userList')}
+                    </Card.Header>
                     <Card.Body className={'data-table-body'}>
                         <Table striped bordered hover variant="dark">
                             <thead>

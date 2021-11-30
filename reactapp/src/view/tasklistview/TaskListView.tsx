@@ -5,6 +5,8 @@ import './TaskListView.css';
 import './../../css/DataTable.css';
 import HeaderView from "../headerview/HeaderView";
 import FooterView from "../footerview/FooterView";
+import {faTasks, faClock, faEdit, faTrash, faDeleteLeft} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export interface TaskListViewProps {
@@ -24,7 +26,10 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
             <div className={'home-view'}>
                 <HeaderView/>
                 <Card className={'data-table'}>
-                    <Card.Header className={'data-table-header'} as={'h1'}>{CommonUtil.getPhrase('todoList')}</Card.Header>
+                    <Card.Header className={'data-table-header'} as={'h1'}>
+                        <FontAwesomeIcon size={"sm"} icon={faTasks}/>{'  '}
+                        {CommonUtil.getPhrase('todoList')}
+                    </Card.Header>
                     <Card.Body className={'data-table-body'}>
                         <Table striped bordered hover variant="dark">
                             <thead>
@@ -43,9 +48,9 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
                                 <td>Otto</td>
                                 <td>@mdo</td>
                                 <td>
-                                    <Button variant={'success'}>{CommonUtil.getPhrase('changeStatus')}</Button>{' '}
-                                    <Button variant={'info'}>{CommonUtil.getPhrase('edit')}</Button>{' '}
-                                    <Button variant={'danger'}>{CommonUtil.getPhrase('delete')}</Button>
+                                    <Button variant={'success'}><FontAwesomeIcon icon={faClock}/></Button>{' '}
+                                    <Button variant={'info'}><FontAwesomeIcon icon={faEdit}/></Button>{' '}
+                                    <Button variant={'danger'}><FontAwesomeIcon icon={faTrash}/></Button>
                                 </td>
                             </tr>
                             <tr>
@@ -54,9 +59,9 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
                                 <td>Thornton</td>
                                 <td>@fat</td>
                                 <td>
-                                    <Button variant={'success'}>{CommonUtil.getPhrase('changeStatus')}</Button>{' '}
-                                    <Button variant={'info'}>{CommonUtil.getPhrase('edit')}</Button>{' '}
-                                    <Button variant={'danger'}>{CommonUtil.getPhrase('delete')}</Button>
+                                    <Button variant={'success'}><FontAwesomeIcon icon={faClock}/></Button>{' '}
+                                    <Button variant={'info'}><FontAwesomeIcon icon={faEdit}/></Button>{' '}
+                                    <Button variant={'danger'}><FontAwesomeIcon icon={faTrash}/></Button>
                                 </td>
                             </tr>
                             <tr>
@@ -64,9 +69,9 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
                                 <td colSpan={2}>Larry the Bird</td>
                                 <td>@twitter</td>
                                 <td>
-                                    <Button variant={'success'}>{CommonUtil.getPhrase('changeStatus')}</Button>{' '}
-                                    <Button variant={'info'}>{CommonUtil.getPhrase('edit')}</Button>{' '}
-                                    <Button variant={'danger'}>{CommonUtil.getPhrase('delete')}</Button>
+                                    <Button variant={'success'}><FontAwesomeIcon icon={faClock}/></Button>{' '}
+                                    <Button variant={'info'}><FontAwesomeIcon icon={faEdit}/></Button>{' '}
+                                    <Button variant={'danger'}><FontAwesomeIcon icon={faTrash}/></Button>
                                 </td>
                             </tr>
                             </tbody>
@@ -78,5 +83,8 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
         );
     }
 }
+// {CommonUtil.getPhrase('changeStatus')}
+// {CommonUtil.getPhrase('edit')}
+// {CommonUtil.getPhrase('delete')}
 
 export default TaskListView;

@@ -3,6 +3,8 @@ import {Navbar, Container, Card, Table, Button, Nav} from 'react-bootstrap';
 import CommonUtil from "../../CommonUtil";
 import './FooterView.css';
 import {Link} from 'react-router-dom';
+import {faCopyright} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export interface FooterViewProps {
@@ -24,6 +26,7 @@ class FooterView extends Component<FooterViewProps, FooterViewState> {
                 <Card style={{backgroundColor:'#bfbfbf'}}>
                     <Card.Body style={{backgroundColor:'#b9b9b9'}}>
                         {CommonUtil.getPhrase('copyRight')}
+                        <FontAwesomeIcon size={"sm"} icon={faCopyright}/>{' '}
                         {year}{'-'}{year+1}
                     </Card.Body>
                 </Card>

@@ -5,6 +5,8 @@ import './ProfileView.css';
 import CommonUtil from "../../CommonUtil";
 import HeaderView from "../headerview/HeaderView";
 import FooterView from "../footerview/FooterView";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faIdCard} from "@fortawesome/free-solid-svg-icons";
 
 export interface ProfileViewProps {
 }
@@ -23,7 +25,7 @@ class ProfileView extends Component<ProfileViewProps, ProfileViewState> {
                 <div className={'profile-view'}>
                     <Card style={{borderRadius: '25px', backgroundColor: '#bfbfbf'}} className=" p-sm-2 text-dark">
                         <Card.Header style={{borderRadius: '25px', fontSize: '35px'}}>
-                            {CommonUtil.getPhrase('profile')}
+                            <FontAwesomeIcon icon={["fas", "user"]} /><FontAwesomeIcon size={"1x"} icon={faIdCard}/>{' '} {CommonUtil.getPhrase('profile')}
                         </Card.Header>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
