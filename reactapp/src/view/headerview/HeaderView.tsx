@@ -28,8 +28,8 @@ class HomeView extends Component<HomeViewProps, HomeViewState> {
     constructor(props: any) {
         super(props);
         this.state= {
-            isAdminLoggedIn: false,
-            isLoggedIn: false,
+            isAdminLoggedIn: true,
+            isLoggedIn: true,
         } as HomeViewState;
     }
 
