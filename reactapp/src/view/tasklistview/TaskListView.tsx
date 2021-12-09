@@ -5,20 +5,28 @@ import './TaskListView.css';
 import './../../css/DataTable.css';
 import HeaderView from "../headerview/HeaderView";
 import FooterView from "../footerview/FooterView";
-import {faTasks, faClock, faEdit, faTrash, faDeleteLeft} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faTasks, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 
 export interface TaskListViewProps {
 }
 
 export interface TaskListViewState {
-
+    taskList: any[];
 }
 
 class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            taskList: []
+        } as TaskListViewState;
+    }
+
+    componentDidMount() {
+        this.getTaskList();
     }
 
     render() {
@@ -34,7 +42,6 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
                         <Table striped bordered hover variant="dark">
                             <thead>
                             <tr>
-                                <th>#</th>
                                 <th>{CommonUtil.getPhrase('title')}</th>
                                 <th>{CommonUtil.getPhrase('description')}</th>
                                 <th>{CommonUtil.getPhrase('status')}</th>
@@ -42,38 +49,31 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>
-                                    <Button variant={'success'}><FontAwesomeIcon icon={faClock}/></Button>{' '}
-                                    <Button variant={'info'}><FontAwesomeIcon icon={faEdit}/></Button>{' '}
-                                    <Button variant={'danger'}><FontAwesomeIcon icon={faTrash}/></Button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>
-                                    <Button variant={'success'}><FontAwesomeIcon icon={faClock}/></Button>{' '}
-                                    <Button variant={'info'}><FontAwesomeIcon icon={faEdit}/></Button>{' '}
-                                    <Button variant={'danger'}><FontAwesomeIcon icon={faTrash}/></Button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td colSpan={2}>Larry the Bird</td>
-                                <td>@twitter</td>
-                                <td>
-                                    <Button variant={'success'}><FontAwesomeIcon icon={faClock}/></Button>{' '}
-                                    <Button variant={'info'}><FontAwesomeIcon icon={faEdit}/></Button>{' '}
-                                    <Button variant={'danger'}><FontAwesomeIcon icon={faTrash}/></Button>
-                                </td>
-                            </tr>
+                            <tbody>
+                            {
+                                this.state.taskList.length === 0 ?
+                                    <tr>
+                                        <td align={"center"} colSpan={4}>{CommonUtil.getPhrase('noTaskFind')}</td>
+                                    </tr> :
+                                    this.state.taskList.map((user) => (
+                                        <tr>
+                                            <td></td>
+                                            <td>{user.title}</td>
+                                            <td>{user.description}</td>
+                                            <td>{user.status}</td>
+                                            <td width={100} align={"center"}>
+                                                <Button variant={"outline-primary"}>
+                                                    <FontAwesomeIcon size={"sm"} icon={faEdit}/>
+                                                </Button>{'   '}
+                                                <Button variant={"outline-danger"}>
+                                                    <FontAwesomeIcon size={"sm"} icon={faTrash}/>
+                                                </Button>
+                                            </td>
+                                        </tr>
+                                    ))
+
+                            }
+                            </tbody>
                             </tbody>
                         </Table>
                     </Card.Body>
@@ -82,9 +82,19 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
             </div>
         );
     }
+
+    getTaskList() {
+        axios.get("http://localhost:8080/task/list")
+            .then(response => {
+                this.setState({
+                    taskList: response.data
+                });
+            })
+            .catch(reason => {
+                console.log(reason)
+            });
+    }
+
 }
-// {CommonUtil.getPhrase('changeStatus')}
-// {CommonUtil.getPhrase('edit')}
-// {CommonUtil.getPhrase('delete')}
 
 export default TaskListView;

@@ -30,15 +30,17 @@
   "save":"ذخیره",
   "avatar":"تصویر پروفایل",
   "taskList":"لیست کارها",
-  "userList":"لیست کاربران",
-  "enterFirstName":"نام را وارد کنید",
-  "enterLastname":"نام خانوادگی را وارد کنید",
-  "enterUsername":"نام کاربری را وارد کنید",
-  "enterPassword":"کلمه عبور را وارد کنید",
+  "userList": "لیست کاربران",
+  "enterFirstName": "نام را وارد کنید",
+  "enterLastname": "نام خانوادگی را وارد کنید",
+  "enterUsername": "نام کاربری را وارد کنید",
+  "enterPassword": "کلمه عبور را وارد کنید",
   "enterEmail": "ایمیل را وارد کنید",
   "dontHaveAnAccount": "حساب کاربری ندارید؟",
   "haveAnAccount": "حساب کاربری دارید؟",
   "copyRight": "تمام حقوق محفوظ است.",
   "welcomeMessage": "به برنامه یادم هست خوش آمدید",
-  "aboutAppMessage": "یادم هست یک دستیار برای مدیریت کارهای روزانه شماست"
+  "aboutAppMessage": "یادم هست یک دستیار برای مدیریت کارهای روزانه شماست",
+  "noUserFound": "هیچ کاربری یافت نشد",
+  "noTaskFind": "هیچ تسکی یافت نشد"
 }

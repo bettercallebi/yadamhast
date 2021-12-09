@@ -1,7 +1,5 @@
 package com.yadamhast.core.entity.task;
 
-import com.yadamhast.core.entity.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,15 +14,15 @@ public class TaskService {
         this.repository = repository;
     }
 
-    public List<Task> list(User user){
-        return repository.findAllTaskByUser(user.getId());
+    public List<Task> list(Long id) {
+        return repository.findAllTaskByUser(id);
     }
 
-    public List<Task> allTask(){
+    public List<Task> allTask() {
         return (List<Task>) repository.findAll();
     }
 
-    public Optional<Task> load(Long id){
+    public Optional<Task> load(Long id) {
         return repository.findById(id);
     }
 

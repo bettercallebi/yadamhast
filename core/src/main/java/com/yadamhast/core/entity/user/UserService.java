@@ -21,15 +21,16 @@ public class UserService {
         return repository.findByUsername(username);
     }
 
-    public List<User> findAllUsers(){
+    public List<User> findAllUsers() {
         return (List<User>) repository.findAll();
     }
 
-    public Long save(User user){
+    public Long save(User user) {
         return repository.save(user).getId();
     }
 
-    public void deleteById(Long Id){
-        repository.deleteById(Id);
+    public Long deleteById(Long id) {
+        repository.deleteById(id);
+        return id;
     }
 }

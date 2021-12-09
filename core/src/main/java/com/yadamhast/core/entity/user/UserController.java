@@ -1,11 +1,12 @@
 package com.yadamhast.core.entity.user;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("user")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     private final UserService service;
@@ -16,8 +17,22 @@ public class UserController {
 
     //todo : Add Json
     @GetMapping("list")
-    public String list(){
-//        return service.findAllUsers().toString();
-        return "service.findAllUsers().toString()";
+    public List<User> list() {
+        return service.findAllUsers();
+    }
+
+    @GetMapping("{id}")
+    public User list(@PathVariable(name = "id") Long id) {
+        return service.findUserById(id);
+    }
+
+    @PostMapping("save")
+    public Long save(@RequestBody User user) {
+        return service.save(user);
+    }
+
+    @PostMapping("delete")
+    public Long delete(@RequestBody User user) {
+        return service.deleteById(user.getId());
     }
 }

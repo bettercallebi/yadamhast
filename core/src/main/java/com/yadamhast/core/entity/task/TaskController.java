@@ -1,6 +1,5 @@
 package com.yadamhast.core.entity.task;
 
-import com.yadamhast.core.entity.user.User;
 import com.yadamhast.core.entity.user.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,6 @@ public class TaskController {
 
     @GetMapping("list")
     public List<Task> list(@RequestParam Long userId) {
-        User user = userService.findUserById(userId);
-        return service.list(user);
+        return service.list(userId);
     }
 }

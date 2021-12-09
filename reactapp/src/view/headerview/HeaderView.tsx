@@ -1,13 +1,22 @@
 import React, {Component} from 'react';
-import {Navbar, Container, Card, Table, Button, Nav} from 'react-bootstrap';
+import {Container, Nav, Navbar} from 'react-bootstrap';
 import CommonUtil from "../../CommonUtil";
 import './HeaderView.css';
 import {Link} from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import logo from '../../logo.png'
-import { faUserAlt, faHome,faSignOutAlt,faClipboardList ,faTasks,faIdCardAlt,faIdCard} from '@fortawesome/free-solid-svg-icons'
+import {
+    faHome,
+    faIdCard,
+    faSignIn,
+    faSignOutAlt,
+    faTasks,
+    faUserAlt,
+    faUserPlus
+} from '@fortawesome/free-solid-svg-icons'
 
 export interface HomeViewProps {
+
 }
 
 export interface HomeViewState {
@@ -18,9 +27,9 @@ export interface HomeViewState {
 class HomeView extends Component<HomeViewProps, HomeViewState> {
     constructor(props: any) {
         super(props);
-        this.state={
-            isAdminLoggedIn:true,
-            isLoggedIn:true,
+        this.state= {
+            isAdminLoggedIn: false,
+            isLoggedIn: false,
         } as HomeViewState;
     }
 
@@ -51,9 +60,11 @@ class HomeView extends Component<HomeViewProps, HomeViewState> {
         return (
             <>
                 <Nav className={'nav'}>
-                    <Link className={'nav-link'} to={"/home"}><FontAwesomeIcon icon={faHome}/>{CommonUtil.getPhrase('home')}</Link>
-                    <Link className={'nav-link'} to={"/signup"}>{CommonUtil.getPhrase('signup')}</Link>
-                    <Link className={'nav-link'} to={"/login"}>{CommonUtil.getPhrase('login')}</Link>
+                    <Link className={'nav-link'} to={"/home"}><FontAwesomeIcon size={"2x"} icon={faHome}/></Link>{' '}
+                    <Link className={'nav-link'} to={"/login"}><FontAwesomeIcon size={"2x"}
+                                                                                icon={faSignIn}/></Link>{' '}
+                    <Link className={'nav-link'} to={"/signup"}><FontAwesomeIcon size={"2x"}
+                                                                                 icon={faUserPlus}/></Link>{' '}
                 </Nav>
             </>
         );
@@ -63,10 +74,13 @@ class HomeView extends Component<HomeViewProps, HomeViewState> {
         return (
             <>
                 <Nav className={'nav'}>
-                    <Link className={'nav-link'} to={"/home"}><FontAwesomeIcon icon={('user-secret')} />{CommonUtil.getPhrase('home')}</Link>
-                    <Link className={'nav-link'} to={"/tasks"}>{CommonUtil.getPhrase('taskList')}</Link>
-                    <Link className={'nav-link'} to={"/profile"}>{CommonUtil.getPhrase('profile')}</Link>
-                    <Link className={'nav-link'} to={"/login"}>{CommonUtil.getPhrase('logout')}</Link>
+                    <Link className={'nav-link'} to={"/home"}><FontAwesomeIcon size={"2x"} icon={faHome}/></Link>{' '}
+                    <Link className={'nav-link'} to={"/users"}><FontAwesomeIcon size={"2x"}
+                                                                                icon={faIdCard}/></Link>{' '}
+                    <Link className={'nav-link'} to={"/profile"}><FontAwesomeIcon size={"2x"}
+                                                                                  icon={faUserAlt}/></Link>{' '}
+                    <Link style={{left: '50px', position: "absolute"}} className={'nav-link'}
+                          to={"/login"}><FontAwesomeIcon size={"2x"} icon={faSignOutAlt}/></Link>
                 </Nav>
             </>
         );

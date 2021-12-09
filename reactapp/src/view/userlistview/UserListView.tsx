@@ -1,24 +1,32 @@
 import React, {Component} from 'react';
-import {Card, Table} from 'react-bootstrap';
+import {Button, Card, Table} from 'react-bootstrap';
 import CommonUtil from "../../CommonUtil";
 import './UserListView.css';
 import './../../css/DataTable.css';
 import HeaderView from "../headerview/HeaderView";
 import FooterView from "../footerview/FooterView";
-import {faContactCard} from "@fortawesome/free-solid-svg-icons";
+import {faContactCard, faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 
 export interface UserListViewProps {
 }
 
 export interface UserListViewState {
-
+    userList: any[]
 }
 
 class UserListView extends Component<UserListViewProps, UserListViewState> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            userList: []
+        } as UserListViewState;
+    }
+
+    componentDidMount() {
+        this.getUserList();
     }
 
     render() {
@@ -33,28 +41,38 @@ class UserListView extends Component<UserListViewProps, UserListViewState> {
                         <Table striped bordered hover variant="dark">
                             <thead>
                             <tr>
-                                <th>#</th>
-                                <th>{CommonUtil.getPhrase('fullName')}</th>
+                                <th>{CommonUtil.getPhrase('firstName')}</th>
+                                <th>{CommonUtil.getPhrase('lastName')}</th>
                                 <th>{CommonUtil.getPhrase('username')}</th>
-                                <th>{CommonUtil.getPhrase('password')}</th>
                                 <th>{CommonUtil.getPhrase('email')}</th>
+                                <th align={"center"}>{CommonUtil.getPhrase('action')}</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Ebi</td>
-                                <td>Abbaszadeh</td>
-                                <td>123</td>
-                                <td>@bettercallebi</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>dds</td>
-                                <td>@fat</td>
-                                <td>e@mail.com</td>
-                            </tr>
+                            {
+                                this.state.userList.length === 0 ?
+                                    <tr>
+                                        <td align={"center"} colSpan={5}>{CommonUtil.getPhrase('noUserFound')}</td>
+                                    </tr> :
+                                    this.state.userList.map((user) => (
+                                        <tr id={user.id}>
+                                            <td>{user.firstName}</td>
+                                            <td>{user.lastName}</td>
+                                            <td>{user.username}</td>
+                                            <td>{user.email}</td>
+                                            <td width={100} align={"center"}>
+                                                <Button variant={"outline-primary"}>
+                                                    <FontAwesomeIcon size={"sm"} icon={faEdit}/>
+                                                </Button>{'   '}
+                                                <Button onClick={(event: any) => {
+                                                    this.deleteUser(user.id)
+                                                }} variant={"outline-danger"}>
+                                                    <FontAwesomeIcon size={"sm"} icon={faTrash}/>
+                                                </Button>
+                                            </td>
+                                        </tr>
+                                    ))
+                            }
                             </tbody>
                         </Table>
                     </Card.Body>
@@ -62,6 +80,25 @@ class UserListView extends Component<UserListViewProps, UserListViewState> {
                 <FooterView/>
             </div>
         );
+    }
+
+    getUserList() {
+        axios.get('http://localhost:8080/user/list')
+            .then(response => {
+                this.setState({userList: response.data});
+            }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    deleteUser(id: number) {
+        axios.post('http://localhost:8080/user/delete', {id: id})
+            .then(response => {
+                alert('Deleted!');
+                this.getUserList();
+            }).catch(error => {
+            console.log(error);
+        });
     }
 }
 
