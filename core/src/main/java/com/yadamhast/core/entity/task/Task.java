@@ -53,8 +53,11 @@ public class Task {
     @Column(name = "dateTime")
     private LocalDateTime dateTime;
 
+    @Column(name = "alarmDateTime")
+    private LocalDateTime alarmDateTime;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="user", nullable=false)
+    @JoinColumn(name = "user", nullable = false)
     private User user;
 
     @Column(name = "taskType")

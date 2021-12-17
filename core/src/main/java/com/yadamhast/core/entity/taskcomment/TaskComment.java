@@ -1,6 +1,5 @@
 package com.yadamhast.core.entity.taskcomment;
 
-import com.yadamhast.core.entity.task.Task;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,7 +23,4 @@ public class TaskComment {
     @Column(name = "color")
     private String  color;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="task", nullable=false)
-    private Task task;
 }

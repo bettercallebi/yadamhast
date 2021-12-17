@@ -15,21 +15,21 @@ export interface TaskListViewProps {
 
 export interface TaskListViewState {
     taskList: any[];
+    userId: number;
 }
 
 class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            taskList: []
+            taskList: [],
+            userId: CommonUtil.currentUser ? CommonUtil.currentUser.id : 14
         } as TaskListViewState;
-    }
-
-    componentDidMount() {
         this.getTaskList();
     }
 
     render() {
+        console.log(this.state.taskList)
         return (
             <div className={'home-view'}>
                 <HeaderView/>
@@ -49,18 +49,17 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
                             </tr>
                             </thead>
                             <tbody>
-                            <tbody>
                             {
                                 this.state.taskList.length === 0 ?
                                     <tr>
                                         <td align={"center"} colSpan={4}>{CommonUtil.getPhrase('noTaskFind')}</td>
                                     </tr> :
-                                    this.state.taskList.map((user) => (
-                                        <tr>
+                                    this.state.taskList.map((task) => (
+                                        <tr id={task.id}>
                                             <td></td>
-                                            <td>{user.title}</td>
-                                            <td>{user.description}</td>
-                                            <td>{user.status}</td>
+                                            <td>{task.title}</td>
+                                            <td>{task.description}</td>
+                                            <td>{task.status}</td>
                                             <td width={100} align={"center"}>
                                                 <Button variant={"outline-primary"}>
                                                     <FontAwesomeIcon size={"sm"} icon={faEdit}/>
@@ -74,7 +73,6 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
 
                             }
                             </tbody>
-                            </tbody>
                         </Table>
                     </Card.Body>
                 </Card>
@@ -84,7 +82,7 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
     }
 
     getTaskList() {
-        axios.get("http://localhost:8080/task/list")
+        axios.get("http://localhost:8080/task/list/" + this.state.userId)
             .then(response => {
                 this.setState({
                     taskList: response.data

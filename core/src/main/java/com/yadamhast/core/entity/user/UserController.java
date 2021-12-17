@@ -35,4 +35,9 @@ public class UserController {
     public Long delete(@RequestBody User user) {
         return service.deleteById(user.getId());
     }
+
+    @PostMapping("login")
+    public User login(@RequestBody User user) {
+        return service.login(user);
+    }
 }

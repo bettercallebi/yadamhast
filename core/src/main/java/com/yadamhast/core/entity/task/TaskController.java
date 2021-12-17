@@ -1,15 +1,13 @@
 package com.yadamhast.core.entity.task;
 
 import com.yadamhast.core.entity.user.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("task")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TaskController {
 
     private final TaskService service;
@@ -20,8 +18,13 @@ public class TaskController {
         this.userService = userService;
     }
 
-    @GetMapping("list")
-    public List<Task> list(@RequestParam Long userId) {
-        return service.list(userId);
+    @GetMapping("list/{id}")
+    public List<Task> list(@PathVariable Long id) {
+        return service.list(id);
+    }
+
+    @PostMapping("save")
+    public Long save(@RequestBody Task task) {
+        return this.service.save(task);
     }
 }

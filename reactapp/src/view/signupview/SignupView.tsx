@@ -133,9 +133,13 @@ class SignupView extends Component<SignupViewProps, SignupViewState> {
         event.preventDefault();
         axios.post('http://localhost:8080/user/save', this.state)
             .then(response => {
-                console.log(response)
+                if (response.data > 0) {
+                    window.location.replace("http://localhost:3000/login");
+                } else {
+                    alert("OOPS, Error in signup!");
+                }
             }).catch(error => {
-            console.log(error)
+            console.log(error);
         });
     }
 

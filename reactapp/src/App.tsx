@@ -5,12 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginView from "./view/loginview/LoginView";
 import SignupView from './view/signupview/SignupView';
 import HomeView from './view/homeview/HomeView';
-import WelcomeView from "./view/welcomeview/WelcomeView";
 import UserListView from "./view/userlistview/UserListView";
 import TaskListView from "./view/tasklistview/TaskListView";
-import HeaderView from "./view/headerview/HeaderView";
-import FooterView from "./view/footerview/FooterView";
 import ProfileView from "./view/profileview/ProfileView";
+import TaskNewView from "./view/tasknewview/TaskNewView";
 
 function App() {
     return (
@@ -23,6 +21,7 @@ function App() {
                 <Route path={'/users'} element={<UserListView/>}/>
                 <Route path={'/tasks'} element={<TaskListView/>}/>
                 <Route path={'/profile'} element={<ProfileView/>}/>
+                <Route path={'/newTask'} element={<TaskNewView/>}/>
             </Routes>
         </Router>
     );

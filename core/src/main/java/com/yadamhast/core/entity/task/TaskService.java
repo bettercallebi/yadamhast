@@ -1,7 +1,10 @@
 package com.yadamhast.core.entity.task;
 
+import com.yadamhast.core.entity.user.User;
+import com.yadamhast.core.entity.user.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,13 +12,20 @@ import java.util.Optional;
 public class TaskService {
 
     private final TaskRepository repository;
+    private final UserService userService;
 
-    public TaskService(TaskRepository repository) {
+    public TaskService(TaskRepository repository, UserService userService) {
         this.repository = repository;
+        this.userService = userService;
     }
 
     public List<Task> list(Long id) {
-        return repository.findAllTaskByUser(id);
+        List<Task> taskList = (List<Task>) repository.findAll();
+        List<Task> responseList = new ArrayList<>();
+        taskList.forEach(task -> {
+            responseList.add(task);
+        });
+        return responseList;
     }
 
     public List<Task> allTask() {
@@ -26,7 +36,9 @@ public class TaskService {
         return repository.findById(id);
     }
 
-    public Long save(Task task){
+    public Long save(Task task) {
+        User user = userService.findById(14L);
+        task.setUser(user);
         return repository.save(task).getId();
     }
 

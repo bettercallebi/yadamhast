@@ -13,11 +13,16 @@ public class UserService {
         this.repository = repository;
     }
 
-    public User findUserById(Long id){
+    public User findUserById(Long id) {
         return repository.findByUserId(id);
     }
 
-    public User findByUsername(String username){
+    public User findById(Long id) {
+        User user = repository.getById(id);
+        return user;
+    }
+
+    public User findByUsername(String username) {
         return repository.findByUsername(username);
     }
 
@@ -32,5 +37,16 @@ public class UserService {
     public Long deleteById(Long id) {
         repository.deleteById(id);
         return id;
+    }
+
+    public User login(User user) {
+        User resUser = repository.findByUsername(user.getUsername());
+        if (resUser != null) {
+            if (user.getPassword().equals(resUser.getPassword())) {
+                return resUser;
+            }
+            return null;
+        }
+        return null;
     }
 }
