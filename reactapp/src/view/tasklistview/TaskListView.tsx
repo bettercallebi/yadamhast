@@ -5,7 +5,7 @@ import './TaskListView.css';
 import './../../css/DataTable.css';
 import HeaderView from "../headerview/HeaderView";
 import FooterView from "../footerview/FooterView";
-import {faEdit, faTasks, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faTasks, faTrash, faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
@@ -74,7 +74,11 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
                             }
                             </tbody>
 
-                        {/*    اینجا باید اضافه بشه*/}
+                            <Button href={'/newtask'} variant="primary" type="submit">
+                                <FontAwesomeIcon size={"sm"} icon={faPlusCircle}/>
+
+                            </Button>
+
                         </Table>
                     </Card.Body>
                 </Card>
