@@ -73,6 +73,8 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
 
                             }
                             </tbody>
+
+                        {/*    اینجا باید اضافه بشه*/}
                         </Table>
                     </Card.Body>
                 </Card>
@@ -82,7 +84,7 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
     }
 
     getTaskList() {
-        axios.get("http://localhost:8080/task/list/" + this.state.userId)
+        axios.get("http://localhost:8080/task/list/" + this.state.userId, {responseType: "json"})
             .then(response => {
                 this.setState({
                     taskList: response.data
