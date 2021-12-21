@@ -83,7 +83,7 @@ class UserListView extends Component<UserListViewProps, UserListViewState> {
     }
 
     getUserList() {
-        axios.get('http://localhost:8080/user/list')
+        axios.get('http://localhost:8080/user/list', {responseType: "json"})
             .then(response => {
                 this.setState({userList: response.data});
             }).catch(error => {
