@@ -8,6 +8,7 @@ import FooterView from "../footerview/FooterView";
 import {faEdit, faPlusCircle, faTasks, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 
 export interface TaskListViewProps {
@@ -75,10 +76,9 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
                                             <td>{task.status}</td>
                                             <td width={100} align={"center"}>
                                                 <Button
-                                                    onClick={event => {
-
-                                                    }}
+                                                    href={'taskedit/' + task.id}
                                                     variant={"outline-primary"}>
+                                                    <Link to={'taskedit/' + task.id}/>
                                                     <FontAwesomeIcon size={"sm"} icon={faEdit}/>
                                                 </Button>{'   '}
                                                 <Button variant={"outline-danger"}

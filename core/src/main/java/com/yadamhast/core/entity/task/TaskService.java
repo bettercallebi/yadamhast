@@ -32,8 +32,18 @@ public class TaskService {
         return (List<Task>) repository.findAll();
     }
 
-    public Optional<Task> load(Long id) {
-        return repository.findById(id);
+    public Task load(Long id) {
+        Optional<Task> optionalTask = repository.findById(id);
+        Task task = new Task();
+        task.setUser(optionalTask.get().getUser());
+        task.setTaskType(optionalTask.get().getTaskType());
+        task.setAlarmDateTime(optionalTask.get().getAlarmDateTime());
+        task.setDescription(optionalTask.get().getDescription());
+        task.setDateTime(optionalTask.get().getDateTime());
+        task.setId(optionalTask.get().getId());
+        task.setTitle(optionalTask.get().getTitle());
+        task.setHasAlarm(optionalTask.get().getHasAlarm());
+        return task;
     }
 
     public Long save(Task task) {
@@ -42,7 +52,7 @@ public class TaskService {
         return repository.save(task).getId();
     }
 
-    public Long delete(Long id){
+    public Long delete(Long id) {
         repository.deleteById(id);
         return id;
     }

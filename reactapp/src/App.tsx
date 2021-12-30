@@ -23,7 +23,7 @@ function App() {
                 <Route path={'/tasks'} element={<TaskListView/>}/>
                 <Route path={'/profile'} element={<ProfileView/>}/>
                 <Route path={'/newTask'} element={<TaskNewView/>}/>
-                <Route path={'/taskedit'} element={<TaskEditView/>}/>
+                <Route path={'/taskedit/:id'} element={<TaskEditView/>}/>
             </Routes>
         </Router>
     );

@@ -23,6 +23,11 @@ public class TaskController {
         return service.list(id);
     }
 
+    @GetMapping("{id}")
+    public Task load(@PathVariable Long id) {
+        return service.load(id);
+    }
+
     @PostMapping("save")
     public Long save(@RequestBody Task task) {
         return this.service.save(task);

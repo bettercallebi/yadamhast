@@ -28,6 +28,7 @@ export interface TaskEditViewState {
     user: any;
     taskType: number;
     date: string;
+    id: number;
 }
 
 class TaskEditView extends Component<TaskEditViewProps, TaskEditViewState> {
@@ -41,9 +42,14 @@ class TaskEditView extends Component<TaskEditViewProps, TaskEditViewState> {
             alarmDateTime: new Date(),
             user: {},
             taskType: 1,
-            date: ''
+            date: '',
+            id: 0,
         } as TaskEditViewState;
-        this.saveTask = this.saveTask.bind(this)
+        this.editTask = this.editTask.bind(this)
+        let url = window.location.pathname;
+        let taskId = url.slice(url.lastIndexOf('/') + 1, url.length)
+        console.log(taskId)
+        this.loadTask(parseInt(taskId))
     }
 
     render() {
@@ -51,7 +57,7 @@ class TaskEditView extends Component<TaskEditViewProps, TaskEditViewState> {
             <div>
                 <HeaderView/>
                 <div className={'task-edit-view'}>
-                    <Form onSubmit={this.saveTask} id={'TaskNewFormId'}>
+                    <Form onSubmit={this.editTask} id={'TaskNewFormId'}>
                         <Card style={{borderRadius: '25px', backgroundColor: '#bfbfbf'}} className=" p-sm-2 text-dark">
                             <Card.Header style={{borderRadius: '25px', fontSize: '35px'}}>
                                 <FontAwesomeIcon size={"1x"} icon={faPaintBrush}/> {CommonUtil.getPhrase('taskEdit')}
@@ -135,7 +141,7 @@ class TaskEditView extends Component<TaskEditViewProps, TaskEditViewState> {
         );
     }
 
-    saveTask(event: any) {
+    editTask(event: any) {
         // this code prevent react from refreshing the page after submit
         event.preventDefault();
         axios.post('http://localhost:8080/task/save', this.state)
@@ -148,6 +154,25 @@ class TaskEditView extends Component<TaskEditViewProps, TaskEditViewState> {
             }).catch(error => {
             console.log(error);
         });
+    }
+
+    loadTask(id: number) {
+        axios.get("http://localhost:8080/task/" + id, {responseType: "json"})
+            .then(response => {
+                this.setState({
+                    title: response.data.title,
+                    description: response.data.description,
+                    hasAlarm: response.data.hasAlarm,
+                    dateTime: response.data.dateTime,
+                    alarmDateTime: response.data.alarmDateTime,
+                    user: response.data.user,
+                    taskType: response.data.taskType,
+                    id: response.data.id,
+                });
+            })
+            .catch(reason => {
+                console.log(reason)
+            });
     }
 
 }
