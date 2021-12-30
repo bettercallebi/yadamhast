@@ -6,6 +6,8 @@ import CommonUtil from "../../CommonUtil";
 import HeaderView from "../headerview/HeaderView";
 import FooterView from "../footerview/FooterView";
 import axios from "axios";
+import {faUserCheck} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export interface LoginViewProps {
 }
@@ -35,7 +37,7 @@ class LoginView extends Component<LoginViewProps, LoginViewState> {
                     <Card style={{borderRadius: '25px', height: '350px', backgroundColor: '#bfbfbf'}}
                           className=" p-sm-2 text-dark">
                         <Card.Header style={{borderRadius: '25px', fontSize: '35px'}}>
-                            {CommonUtil.getPhrase('app')}
+                            <FontAwesomeIcon size={"1x"} icon={faUserCheck}/>{CommonUtil.getPhrase('login')}
                         </Card.Header>
                         <Form onSubmit={this.login}>
                             <Form.Group className="mb-3" controlId="username">

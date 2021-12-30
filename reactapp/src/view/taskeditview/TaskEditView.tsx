@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Button, Card, Form} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.rtl.min.css';
-import './TaskNewView.css';
+import './TaskEditView.css';
 import CommonUtil from "../../CommonUtil";
 import FooterView from "../footerview/FooterView";
 import HeaderView from "../headerview/HeaderView";
 import axios from "axios";
 import {DatePicker} from 'jalali-react-datepicker';
-import {faThumbtack} from "@fortawesome/free-solid-svg-icons";
+import {faPaintBrush} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export enum TaskStatus {
@@ -16,10 +16,10 @@ export enum TaskStatus {
     'POSTPONED',
 }
 
-export interface TaskNewViewProps {
+export interface TaskEditViewProps {
 }
 
-export interface TaskNewViewState {
+export interface TaskEditViewState {
     title: string;
     description: string;
     hasAlarm: boolean;
@@ -30,7 +30,7 @@ export interface TaskNewViewState {
     date: string;
 }
 
-class TaskNewView extends Component<TaskNewViewProps, TaskNewViewState> {
+class TaskEditView extends Component<TaskEditViewProps, TaskEditViewState> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -42,7 +42,7 @@ class TaskNewView extends Component<TaskNewViewProps, TaskNewViewState> {
             user: {},
             taskType: 1,
             date: ''
-        } as TaskNewViewState;
+        } as TaskEditViewState;
         this.saveTask = this.saveTask.bind(this)
     }
 
@@ -50,16 +50,16 @@ class TaskNewView extends Component<TaskNewViewProps, TaskNewViewState> {
         return (
             <div>
                 <HeaderView/>
-                <div className={'task-new-view'}>
+                <div className={'task-edit-view'}>
                     <Form onSubmit={this.saveTask} id={'TaskNewFormId'}>
                         <Card style={{borderRadius: '25px', backgroundColor: '#bfbfbf'}} className=" p-sm-2 text-dark">
                             <Card.Header style={{borderRadius: '25px', fontSize: '35px'}}>
-                                <FontAwesomeIcon size={"1x"} icon={faThumbtack}/> {CommonUtil.getPhrase('newTask')}
+                                <FontAwesomeIcon size={"1x"} icon={faPaintBrush}/> {CommonUtil.getPhrase('taskEdit')}
                             </Card.Header>
                             <Card.Body>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>
-                                          {CommonUtil.getPhrase('title')}
+                                        {CommonUtil.getPhrase('title')}
                                     </Form.Label>
                                     <Form.Control
                                         name={'title'}
@@ -152,4 +152,4 @@ class TaskNewView extends Component<TaskNewViewProps, TaskNewViewState> {
 
 }
 
-export default TaskNewView;
+export default TaskEditView;

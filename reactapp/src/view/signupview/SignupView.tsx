@@ -6,6 +6,8 @@ import CommonUtil from "../../CommonUtil";
 import FooterView from "../footerview/FooterView";
 import HeaderView from "../headerview/HeaderView";
 import axios from "axios";
+import {faUserPlus} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export interface SignupViewProps {
 }
@@ -43,7 +45,7 @@ class SignupView extends Component<SignupViewProps, SignupViewState> {
                     <Form onSubmit={this.saveUser} id={'signupFormId'}>
                         <Card style={{borderRadius: '25px', backgroundColor: '#bfbfbf'}} className=" p-sm-2 text-dark">
                             <Card.Header style={{borderRadius: '25px', fontSize: '35px'}}>
-                                {CommonUtil.getPhrase('app')}
+                                     <FontAwesomeIcon size={"1x"} icon={faUserPlus}/> {CommonUtil.getPhrase('signup')}
                             </Card.Header>
                             <Card.Body>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
