@@ -31,6 +31,11 @@ public class UserController {
         return service.save(user);
     }
 
+    @PostMapping("edit")
+    public Long edit(@RequestBody User user) {
+        return service.save(user);
+    }
+
     @PostMapping("delete")
     public Long delete(@RequestBody User user) {
         return service.deleteById(user.getId());

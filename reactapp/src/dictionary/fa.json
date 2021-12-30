@@ -53,5 +53,6 @@
   "loggedIn": "وارد شد.",
   "serverError": "خطایی سمت سرور رخ داده است.",
   "userNotFound": "کاربری با این مشخصات یافت نشد.",
-  "errorInTaskService": "خطایی در سرویس ذخیره کار رخ داد!"
+  "errorInTaskService": "خطایی در سرویس ذخیره کار رخ داد!",
+  "usernameExist": "نام کاربری تکراری میباشد"
 }

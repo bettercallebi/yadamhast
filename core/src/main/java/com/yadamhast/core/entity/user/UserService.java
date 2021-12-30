@@ -31,7 +31,15 @@ public class UserService {
     }
 
     public Long save(User user) {
-        return repository.save(user).getId();
+        User oldUser = repository.findByUsername(user.getUsername());
+        if (oldUser == null) {
+            return repository.save(user).getId();
+        } else {
+            if (user.getId() == oldUser.getId()) {
+                return repository.save(user).getId();
+            }
+        }
+        return -2L;
     }
 
     public Long deleteById(Long id) {

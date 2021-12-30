@@ -19,8 +19,8 @@ export interface ProfileViewState {
     username: string;
     email: string;
     password: string;
-    userType: number,
-    taskList: any[]
+    userType: number;
+    id: number;
 }
 
 class ProfileView extends Component<ProfileViewProps, ProfileViewState> {
@@ -28,13 +28,13 @@ class ProfileView extends Component<ProfileViewProps, ProfileViewState> {
         super(props);
         this.state = {
             user: {},
+            id: 0,
             firstName: '',
             lastName: '',
             username: '',
             email: '',
             password: '',
-            userType: 1,
-            taskList: []
+            userType: 1
         } as ProfileViewState;
         this.editUser = this.editUser.bind(this)
     }
@@ -153,7 +153,8 @@ class ProfileView extends Component<ProfileViewProps, ProfileViewState> {
                     username: response.data.username,
                     email: response.data.email,
                     password: response.data.password,
-                    userType: response.data.userType
+                    userType: response.data.userType,
+                    id: response.data.id
                 });
             })
             .catch(reason => {
@@ -165,9 +166,9 @@ class ProfileView extends Component<ProfileViewProps, ProfileViewState> {
         event.preventDefault();
         axios.post("http://localhost:8080/user/edit", this.state)
             .then(response => {
-                this.setState({
-                    user: response.data
-                });
+                if (response.data < 1) {
+                    alert(CommonUtil.getPhrase('usernameExist'))
+                }
             })
             .catch(reason => {
                 console.log(reason)
