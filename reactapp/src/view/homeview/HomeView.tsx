@@ -23,7 +23,7 @@ class HomeView extends Component<HomeViewProps, HomeViewState> {
         return (
             <div className={'home-view'}>
                 <HeaderView/>
-                <Card className={'home-message'}>s
+                <Card className={'home-message'}>
                     <Card.Body>
                         <blockquote className={'blockquote mb-0'}>
                             <p>

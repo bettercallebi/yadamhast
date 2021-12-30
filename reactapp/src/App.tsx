@@ -9,6 +9,7 @@ import UserListView from "./view/userlistview/UserListView";
 import TaskListView from "./view/tasklistview/TaskListView";
 import ProfileView from "./view/profileview/ProfileView";
 import TaskNewView from "./view/tasknewview/TaskNewView";
+import TaskEditView from "./view/taskeditview/TaskEditView";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path={'/tasks'} element={<TaskListView/>}/>
                 <Route path={'/profile'} element={<ProfileView/>}/>
                 <Route path={'/newTask'} element={<TaskNewView/>}/>
+                <Route path={'/taskedit'} element={<TaskEditView/>}/>
             </Routes>
         </Router>
     );
