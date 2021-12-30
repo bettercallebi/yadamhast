@@ -14,10 +14,6 @@ export interface HomeViewState {
 }
 
 class HomeView extends Component<HomeViewProps, HomeViewState> {
-    constructor(props: any) {
-        super(props);
-        console.log(CommonUtil.currentUser)
-    }
 
     render() {
         return (

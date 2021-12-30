@@ -5,7 +5,7 @@ import './TaskListView.css';
 import './../../css/DataTable.css';
 import HeaderView from "../headerview/HeaderView";
 import FooterView from "../footerview/FooterView";
-import {faEdit, faTasks, faTrash, faPlusCircle} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faPlusCircle, faTasks, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
@@ -16,6 +16,7 @@ export interface TaskListViewProps {
 export interface TaskListViewState {
     taskList: any[];
     userId: number;
+    user: any;
 }
 
 class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
@@ -23,13 +24,26 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
         super(props);
         this.state = {
             taskList: [],
-            userId: CommonUtil.currentUser ? CommonUtil.currentUser.id : 14
+            userId: 0,
+            user: {}
         } as TaskListViewState;
-        this.getTaskList();
+    }
+
+    componentDidMount() {
+        let u = localStorage.getItem('user') || '{}';
+        let userModel = {
+            username: JSON.parse(u).username,
+            id: JSON.parse(u).id,
+            userType: JSON.parse(u).userType
+        }
+        this.setState({
+            user: userModel,
+            userId: userModel.id
+        });
+        this.getTaskList(userModel.id);
     }
 
     render() {
-        console.log(this.state.taskList)
         return (
             <div className={'home-view'}>
                 <HeaderView/>
@@ -56,15 +70,21 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
                                     </tr> :
                                     this.state.taskList.map((task) => (
                                         <tr id={task.id}>
-                                            <td></td>
                                             <td>{task.title}</td>
                                             <td>{task.description}</td>
                                             <td>{task.status}</td>
                                             <td width={100} align={"center"}>
-                                                <Button variant={"outline-primary"}>
+                                                <Button
+                                                    onClick={event => {
+
+                                                    }}
+                                                    variant={"outline-primary"}>
                                                     <FontAwesomeIcon size={"sm"} icon={faEdit}/>
                                                 </Button>{'   '}
-                                                <Button variant={"outline-danger"}>
+                                                <Button variant={"outline-danger"}
+                                                        onClick={(event: any) => {
+                                                            this.deleteTask(task.id)
+                                                        }}>
                                                     <FontAwesomeIcon size={"sm"} icon={faTrash}/>
                                                 </Button>
                                             </td>
@@ -87,12 +107,22 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
         );
     }
 
-    getTaskList() {
-        axios.get("http://localhost:8080/task/list/" + this.state.userId, {responseType: "json"})
+    getTaskList(id: number) {
+        axios.get("http://localhost:8080/task/list/" + id, {responseType: "json"})
             .then(response => {
                 this.setState({
                     taskList: response.data
                 });
+            })
+            .catch(reason => {
+                console.log(reason)
+            });
+    }
+
+    deleteTask(id: number) {
+        axios.post("http://localhost:8080/task/delete", {id: id})
+            .then(response => {
+                this.getTaskList(this.state.user.id);
             })
             .catch(reason => {
                 console.log(reason)

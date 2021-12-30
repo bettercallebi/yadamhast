@@ -1,9 +1,11 @@
 package com.yadamhast.core.entity.task;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.yadamhast.core.entity.user.User;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 enum TaskType {
@@ -34,7 +36,8 @@ enum TaskStatus {
 @Data
 @Entity
 @Table(name = "task")
-public class Task {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Task implements Serializable {
 
     @Id
     @Column(name = "id")

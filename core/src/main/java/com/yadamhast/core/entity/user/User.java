@@ -1,10 +1,10 @@
 package com.yadamhast.core.entity.user;
 
-import com.yadamhast.core.entity.task.Task;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 enum UserType {
     ADMIN(0),
@@ -20,7 +20,8 @@ enum UserType {
 @Data
 @Entity
 @Table(name = "user")
-public class User {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class User implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -41,9 +42,6 @@ public class User {
 
     @Column(name = "password")
     private String  password;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Task> taskList;
 
     @Column(name = "userType")
     @Enumerated(EnumType.STRING)

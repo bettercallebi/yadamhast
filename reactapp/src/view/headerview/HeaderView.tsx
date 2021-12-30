@@ -15,30 +15,50 @@ import {
     faUserPlus
 } from '@fortawesome/free-solid-svg-icons'
 
-export interface HomeViewProps {
+export interface HeaderViewProps {
 
 }
 
-export interface HomeViewState {
-    isLoggedIn: boolean
-    isAdminLoggedIn: boolean
+export interface HeaderViewState {
+    isLoggedIn: boolean;
+    isAdminLoggedIn: boolean;
+    user: any;
 }
 
-class HomeView extends Component<HomeViewProps, HomeViewState> {
+class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
     constructor(props: any) {
         super(props);
-        this.state= {
-            isAdminLoggedIn: true,
-            isLoggedIn: true,
-        } as HomeViewState;
+        this.state = {
+            isAdminLoggedIn: false,
+            isLoggedIn: false,
+            user: {}
+        } as HeaderViewState;
+    }
+
+    componentDidMount() {
+        let u = localStorage.getItem('user') || '{}';
+        let userModel = {
+            username: JSON.parse(u).username,
+            id: JSON.parse(u).id,
+            userType: JSON.parse(u).userType
+        }
+        this.setState({
+            user: userModel
+        });
+        if (userModel.id != null) {
+            this.setState({isLoggedIn: true});
+            if (userModel.userType === 'ADMIN') {
+                this.setState({isAdminLoggedIn: true});
+            }
+        }
     }
 
     render() {
         return (
             <div className={'header-view'}>
-                <Navbar style={{backgroundColor:'#bfbfbf'}}>
+                <Navbar style={{backgroundColor: '#bfbfbf'}}>
                     <Container className={'nav-container'}>
-                        <Link style={{fontWeight:"bold"}} className={'navbar-brand'} to={"/home"}>
+                        <Link style={{fontWeight: "bold"}} className={'navbar-brand'} to={"/home"}>
                             {' '}
                             <img width={45} src={logo}/>{'   '}
                             {CommonUtil.getPhrase('app')}{'  '}
@@ -75,11 +95,13 @@ class HomeView extends Component<HomeViewProps, HomeViewState> {
             <>
                 <Nav className={'nav'}>
                     <Link className={'nav-link'} to={"/home"}><FontAwesomeIcon size={"2x"} icon={faHome}/></Link>{' '}
-                    <Link className={'nav-link'} to={"/users"}><FontAwesomeIcon size={"2x"}
-                                                                                icon={faIdCard}/></Link>{' '}
+                    <Link className={'nav-link'} to={"/tasks"}><FontAwesomeIcon size={"2x"}
+                                                                                icon={faTasks}/></Link>{' '}
                     <Link className={'nav-link'} to={"/profile"}><FontAwesomeIcon size={"2x"}
                                                                                   icon={faUserAlt}/></Link>{' '}
-                    <Link style={{left: '50px', position: "absolute"}} className={'nav-link'}
+                    <Link onClick={event => {
+                        localStorage.clear();
+                    }} style={{left: '50px', position: "absolute"}} className={'nav-link'}
                           to={"/login"}><FontAwesomeIcon size={"2x"} icon={faSignOutAlt}/></Link>
                 </Nav>
             </>
@@ -91,14 +113,17 @@ class HomeView extends Component<HomeViewProps, HomeViewState> {
             <>
                 <Nav className={'nav'}>
                     <Link className={'nav-link'} to={"/home"}><FontAwesomeIcon size={"2x"} icon={faHome}/></Link>{' '}
-                    <Link className={'nav-link'} to={"/users"}><FontAwesomeIcon size={"2x"} icon={faIdCard}/></Link>{' '}
+                    <Link className={'nav-link'} to={"/users"}><FontAwesomeIcon size={"2x"}
+                                                                                icon={faIdCard}/></Link>{' '}
                     <Link className={'nav-link'} to={"/tasks"}><FontAwesomeIcon size={"2x"} icon={faTasks}/></Link>{' '}
-                    <Link className={'nav-link'} to={"/profile"}><FontAwesomeIcon size={"2x"} icon={faUserAlt}/></Link>{' '}
-                    <Link style={{left:'50px',position:"absolute"}} className={'nav-link'} to={"/login"}><FontAwesomeIcon size={"2x"} icon={faSignOutAlt}/></Link>
+                    <Link className={'nav-link'} to={"/profile"}><FontAwesomeIcon size={"2x"}
+                                                                                  icon={faUserAlt}/></Link>{' '}
+                    <Link style={{left: '50px', position: "absolute"}} className={'nav-link'}
+                          to={"/login"}><FontAwesomeIcon size={"2x"} icon={faSignOutAlt}/></Link>
                 </Nav>
             </>
         );
     }
 }
 
-export default HomeView;
+export default HeaderView;

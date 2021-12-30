@@ -15,7 +15,7 @@ export interface LoginViewProps {
 export interface LoginViewState {
     username: string;
     password: string;
-    user: any;
+    user: string;
 }
 
 class LoginView extends Component<LoginViewProps, LoginViewState> {
@@ -24,7 +24,7 @@ class LoginView extends Component<LoginViewProps, LoginViewState> {
         this.state = {
             username: '',
             password: '',
-            user: {}
+            user: ''
         }
         this.login = this.login.bind(this)
     }
@@ -80,22 +80,20 @@ class LoginView extends Component<LoginViewProps, LoginViewState> {
 
     login(event: any) {
         event.preventDefault();
-        console.log('reached')
         axios.post('http://localhost:8080/user/login', this.state)
             .then(response => {
-                console.log('reachedgg')
                 if (response.data) {
                     this.setState({user: response.data});
                     CommonUtil.currentUser = response.data;
-                    console.log(response.data)
-                    console.log(CommonUtil.currentUser)
-                    alert('You have logged in successfully');
+                    localStorage.setItem('user', JSON.stringify(this.state.user));
+                    alert(CommonUtil.getPhrase('user') + ' ' + response.data.username + ' ' + CommonUtil.getPhrase('loggedIn'));
                     window.location.replace('http://localhost:3000/home');
                 } else {
-                    alert('User Not Found');
+                    alert(CommonUtil.getPhrase('userNotFound'));
                 }
             }).catch(reason => {
             console.log(reason)
+            alert(CommonUtil.getPhrase('serverError'));
         });
     }
 

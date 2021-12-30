@@ -49,5 +49,9 @@
   "noUserFound": "هیچ کاربری یافت نشد",
   "noTaskFind": "هیچ تسکی یافت نشد",
   "taskEdit": "ویرایش کار",
-  "newTask": "افزودن کار"
+  "newTask": "افزودن کار",
+  "loggedIn": "وارد شد.",
+  "serverError": "خطایی سمت سرور رخ داده است.",
+  "userNotFound": "کاربری با این مشخصات یافت نشد.",
+  "errorInTaskService": "خطایی در سرویس ذخیره کار رخ داد!"
 }

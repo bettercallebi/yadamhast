@@ -118,7 +118,7 @@ class SignupView extends Component<SignupViewProps, SignupViewState> {
                                 <Button variant="primary" type="submit">
                                     {CommonUtil.getPhrase('signup')}
                                 </Button>{'  '}
-                                <Button href={'/login'} variant="secondary" type="submit">
+                                <Button href={'/login'} variant="secondary">
                                     {CommonUtil.getPhrase('haveAnAccount')}
                                 </Button>
                             </Card.Footer>

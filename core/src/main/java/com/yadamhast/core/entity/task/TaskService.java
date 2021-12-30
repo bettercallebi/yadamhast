@@ -20,7 +20,7 @@ public class TaskService {
     }
 
     public List<Task> list(Long id) {
-        List<Task> taskList = (List<Task>) repository.findAll();
+        List<Task> taskList = (List<Task>) repository.findAllTaskByUser(id);
         List<Task> responseList = new ArrayList<>();
         taskList.forEach(task -> {
             responseList.add(task);
@@ -37,7 +37,7 @@ public class TaskService {
     }
 
     public Long save(Task task) {
-        User user = userService.findById(14L);
+        User user = userService.findUserById(task.getUser().getId());
         task.setUser(user);
         return repository.save(task).getId();
     }

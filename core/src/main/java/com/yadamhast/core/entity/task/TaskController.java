@@ -27,4 +27,14 @@ public class TaskController {
     public Long save(@RequestBody Task task) {
         return this.service.save(task);
     }
+
+    @PostMapping("edit")
+    public Long edit(@RequestBody Task task) {
+        return this.service.save(task);
+    }
+
+    @PostMapping("delete")
+    public Long delete(@RequestBody Task task) {
+        return this.service.delete(task.getId());
+    }
 }

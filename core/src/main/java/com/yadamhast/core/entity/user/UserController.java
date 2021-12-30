@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public User list(@PathVariable(name = "id") Long id) {
+    public User load(@PathVariable(name = "id") Long id) {
         return service.findUserById(id);
     }
 

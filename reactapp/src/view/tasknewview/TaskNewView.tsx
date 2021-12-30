@@ -43,7 +43,19 @@ class TaskNewView extends Component<TaskNewViewProps, TaskNewViewState> {
             taskType: 1,
             date: ''
         } as TaskNewViewState;
-        this.saveTask = this.saveTask.bind(this)
+        this.saveTask = this.saveTask.bind(this);
+    }
+
+    componentDidMount() {
+        let u = localStorage.getItem('user') || '{}';
+        let userModel = {
+            username: JSON.parse(u).username,
+            id: JSON.parse(u).id,
+            userType: JSON.parse(u).userType
+        }
+        this.setState({
+            user: userModel,
+        });
     }
 
     render() {
@@ -143,7 +155,7 @@ class TaskNewView extends Component<TaskNewViewProps, TaskNewViewState> {
                 if (response.data > 0) {
                     window.location.replace("http://localhost:3000/tasks");
                 } else {
-                    alert("OOPS, Error in Task Service!");
+                    alert(CommonUtil.getPhrase('errorInTaskService'));
                 }
             }).catch(error => {
             console.log(error);
