@@ -67,5 +67,9 @@ public class Task implements Serializable {
     @Enumerated(EnumType.STRING)
     private TaskType taskType;
 
+    @Column(name = "taskStatus")
+    @Enumerated(EnumType.STRING)
+    private TaskStatus taskStatus;
+
 
 }

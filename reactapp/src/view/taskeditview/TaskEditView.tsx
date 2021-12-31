@@ -27,6 +27,7 @@ export interface TaskEditViewState {
     alarmDateTime: Date;
     user: any;
     taskType: number;
+    taskStatus: number;
     date: string;
     id: number;
 }
@@ -42,13 +43,14 @@ class TaskEditView extends Component<TaskEditViewProps, TaskEditViewState> {
             alarmDateTime: new Date(),
             user: {},
             taskType: 1,
+            taskStatus: 1,
             date: '',
             id: 0,
         } as TaskEditViewState;
         this.editTask = this.editTask.bind(this)
+        //get task id from url
         let url = window.location.pathname;
         let taskId = url.slice(url.lastIndexOf('/') + 1, url.length)
-        console.log(taskId)
         this.loadTask(parseInt(taskId))
     }
 
@@ -63,6 +65,22 @@ class TaskEditView extends Component<TaskEditViewProps, TaskEditViewState> {
                                 <FontAwesomeIcon size={"1x"} icon={faPaintBrush}/> {CommonUtil.getPhrase('taskEdit')}
                             </Card.Header>
                             <Card.Body>
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Label>
+                                        {CommonUtil.getPhrase('taskStatus')}
+                                    </Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        name={'taskStatus'}
+                                        value={this.state.taskStatus}
+                                        onChange={(event) => {
+                                            this.setState({taskStatus: parseInt(event.target.value)})
+                                        }}>
+                                        <option value={0}>{CommonUtil.getPhrase('scheduled')}</option>
+                                        <option value={1}>{CommonUtil.getPhrase('done')}</option>
+                                        <option value={2}>{CommonUtil.getPhrase('postponed')}</option>
+                                    </Form.Control>
+                                </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>
                                         {CommonUtil.getPhrase('title')}
@@ -89,6 +107,23 @@ class TaskEditView extends Component<TaskEditViewProps, TaskEditViewState> {
                                         }}
                                         type="text"
                                         placeholder={CommonUtil.getPhrase('enterDescription')}/>
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Label>
+                                        {CommonUtil.getPhrase('taskType')}
+                                    </Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        name={'taskType'}
+                                        value={this.state.taskType}
+                                        onChange={(event) => {
+                                            this.setState({taskType: parseInt(event.target.value)})
+                                        }}>
+                                        <option value={0}>{CommonUtil.getPhrase('daily')}</option>
+                                        <option value={1}>{CommonUtil.getPhrase('weekly')}</option>
+                                        <option value={2}>{CommonUtil.getPhrase('monthly')}</option>
+                                        <option value={3}>{CommonUtil.getPhrase('yearly')}</option>
+                                    </Form.Control>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Check
@@ -167,6 +202,7 @@ class TaskEditView extends Component<TaskEditViewProps, TaskEditViewState> {
                     alarmDateTime: response.data.alarmDateTime,
                     user: response.data.user,
                     taskType: response.data.taskType,
+                    taskStatus: response.data.taskStatus,
                     id: response.data.id,
                 });
             })

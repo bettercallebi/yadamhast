@@ -97,6 +97,24 @@ class TaskNewView extends Component<TaskNewViewProps, TaskNewViewState> {
                                         placeholder={CommonUtil.getPhrase('enterDescription')}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Label>
+                                        {CommonUtil.getPhrase('taskType')}
+                                    </Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        name={'taskType'}
+                                        value={this.state.taskType}
+                                        onChange={(event) => {
+                                            console.log(event.target.value)
+                                            this.setState({taskType: parseInt(event.target.value)})
+                                        }}>
+                                        <option value={0}>{CommonUtil.getPhrase('daily')}</option>
+                                        <option value={1}>{CommonUtil.getPhrase('weekly')}</option>
+                                        <option value={2}>{CommonUtil.getPhrase('monthly')}</option>
+                                        <option value={3}>{CommonUtil.getPhrase('yearly')}</option>
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Check
                                         name={'hasAlarm'}
                                         onChange={(event) => {
