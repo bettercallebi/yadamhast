@@ -1,6 +1,5 @@
 package com.yadamhast.core.entity.task;
 
-import com.github.sbahmani.jalcal.util.DateException;
 import com.yadamhast.core.entity.user.User;
 import com.yadamhast.core.entity.user.UserService;
 import org.springframework.stereotype.Service;
@@ -47,7 +46,7 @@ public class TaskService {
         return task;
     }
 
-    public Long save(Task task) throws DateException {
+    public Long save(Task task) {
         User user = userService.findUserById(task.getUser().getId());
         task.setUser(user);
         if (!task.getHasAlarm()) {
