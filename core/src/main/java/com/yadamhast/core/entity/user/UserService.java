@@ -2,6 +2,7 @@ package com.yadamhast.core.entity.user;
 
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
@@ -56,5 +57,22 @@ public class UserService {
             return null;
         }
         return null;
+    }
+
+    @PostConstruct
+    private void postConstruct() {
+        User user = new User();
+        user.setFirstName("Admin");
+        user.setLastName("YadamHast");
+        user.setUsername("admin");
+        user.setPassword("admin");
+        user.setEmail("admin@yadamhast.com");
+        user.setUserType(UserType.ADMIN);
+        if (repository.findByUsername(user.getUsername()) == null) {
+            repository.save(user);
+            System.out.println("Admin User Created!");
+        } else {
+            System.out.println("Admin User Exist!");
+        }
     }
 }
