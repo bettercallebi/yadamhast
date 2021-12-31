@@ -59,6 +59,9 @@ public class UserService {
         return null;
     }
 
+    /**
+     * Create Default admin user
+     */
     @PostConstruct
     private void postConstruct() {
         User user = new User();
@@ -68,11 +71,14 @@ public class UserService {
         user.setPassword("admin");
         user.setEmail("admin@yadamhast.com");
         user.setUserType(UserType.ADMIN);
-        if (repository.findByUsername(user.getUsername()) == null) {
+        User adminUser = repository.findByUsername(user.getUsername());
+        if (adminUser == null) {
             repository.save(user);
-            System.out.println("Admin User Created!");
+            System.out.println("\t\tAdmin User Created!");
         } else {
-            System.out.println("Admin User Exist!");
+            adminUser.setPassword("admin");
+            repository.save(adminUser);
+            System.out.println("\t\tAdmin User Exist!");
         }
     }
 }
