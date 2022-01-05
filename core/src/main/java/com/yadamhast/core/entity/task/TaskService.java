@@ -34,6 +34,7 @@ public class TaskService {
 
     public Task load(Long id) {
         Optional<Task> optionalTask = repository.findById(id);
+        //map optionalTask into Task object
         Task task = new Task();
         task.setUser(optionalTask.get().getUser());
         task.setTaskType(optionalTask.get().getTaskType());

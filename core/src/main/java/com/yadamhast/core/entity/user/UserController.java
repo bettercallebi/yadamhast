@@ -15,7 +15,6 @@ public class UserController {
         this.service = service;
     }
 
-    //todo : Add Json
     @GetMapping("list")
     public List<User> list() {
         return service.findAllUsers();

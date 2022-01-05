@@ -79,7 +79,7 @@ class TaskListView extends Component<TaskListViewProps, TaskListViewState> {
                             {
                                 this.state.taskList.length === 0 ?
                                     <tr>
-                                        <td align={"center"} colSpan={4}>{CommonUtil.getPhrase('noTaskFind')}</td>
+                                        <td align={"center"} colSpan={5}>{CommonUtil.getPhrase('noTaskFind')}</td>
                                     </tr> :
                                     this.state.taskList.map((task) => (
                                         <tr id={task.id}>

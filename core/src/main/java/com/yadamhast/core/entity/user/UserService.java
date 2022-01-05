@@ -40,7 +40,7 @@ public class UserService {
                 return repository.save(user).getId();
             }
         }
-        return -2L;
+        return -2L; //return error code -2 for duplicate username
     }
 
     public Long deleteById(Long id) {

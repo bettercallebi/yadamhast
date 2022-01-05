@@ -38,6 +38,8 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
     componentDidMount() {
         let u = localStorage.getItem('user') || '{}';
         let userModel = {
+            firstName: JSON.parse(u).firstName,
+            lastName: JSON.parse(u).lastName,
             username: JSON.parse(u).username,
             id: JSON.parse(u).id,
             userType: JSON.parse(u).userType
@@ -81,8 +83,9 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
             <>
                 <Nav className={'nav'}>
                     <Link className={'nav-link'} to={"/home"}><FontAwesomeIcon size={"2x"} icon={faHome}/></Link>{' '}
-                    <Link className={'nav-link'} to={"/login"}><FontAwesomeIcon size={"2x"}
-                                                                                icon={faSignIn}/></Link>{' '}
+                    <Link className={'nav-link'} to={"/login"}>
+                        <FontAwesomeIcon size={"2x"} icon={faSignIn}/>
+                    </Link>
                     <Link className={'nav-link'} to={"/signup"}><FontAwesomeIcon size={"2x"}
                                                                                  icon={faUserPlus}/></Link>{' '}
                 </Nav>
@@ -98,7 +101,10 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
                     <Link className={'nav-link'} to={"/tasks"}><FontAwesomeIcon size={"2x"}
                                                                                 icon={faTasks}/></Link>{' '}
                     <Link className={'nav-link'} to={"/profile"}><FontAwesomeIcon size={"2x"}
-                                                                                  icon={faUserAlt}/></Link>{' '}
+                                                                                  icon={faUserAlt}/>
+                    </Link>
+                    <Link className={'nav-link'} to={"/profile"}>{' '+ this.state.user?this.state.user.firstName+' '+this.state.user.lastName:''}</Link>
+
                     <Link onClick={event => {
                         localStorage.clear();
                     }} style={{left: '50px', position: "absolute"}} className={'nav-link'}
@@ -116,9 +122,11 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
                     <Link className={'nav-link'} to={"/users"}><FontAwesomeIcon size={"2x"}
                                                                                 icon={faIdCard}/></Link>{' '}
                     <Link className={'nav-link'} to={"/tasks"}><FontAwesomeIcon size={"2x"} icon={faTasks}/></Link>{' '}
-                    <Link className={'nav-link'} to={"/profile"}><FontAwesomeIcon size={"2x"}
-                                                                                  icon={faUserAlt}/></Link>{' '}
-                    <Link style={{left: '50px', position: "absolute"}} className={'nav-link'}
+                    <Link className={'nav-link'} to={"/profile"}><FontAwesomeIcon size={"2x"} icon={faUserAlt}/></Link>
+                    <Link className={'nav-link'} to={"/profile"}>{' '+ this.state.user?this.state.user.firstName+' '+this.state.user.lastName:''}</Link>
+                    <Link onClick={event => {
+                        localStorage.clear();
+                    }} style={{left: '50px', position: "absolute"}} className={'nav-link'}
                           to={"/login"}><FontAwesomeIcon size={"2x"} icon={faSignOutAlt}/></Link>
                 </Nav>
             </>
